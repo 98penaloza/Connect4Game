@@ -36,23 +36,3 @@ int main(int, char**){
     }
     return 0;
 }
-
-
-///  
-///   1 coding interview similar to tech screen - debugging excersice  
-///   1 sys design and software design - more coding focus using hackerrank with diagrams | not init empty, very high level, less about optz and more about a broader sol
-///     - more coding focus?
-///   1 behavioral interview - talking about tech background
-///      - more complex or diff project i worked on and the impact on the business
-///      - self reflection
-///      - prioritization
-///      - interest in anduril
-///   1 team fit interview - non technical vibe check?
-///      - collaboration
-///      - motivation and growth goals
-///      - what I've worked on 
-
-
-/// vest and camera on
-/// prep questions
-///  
