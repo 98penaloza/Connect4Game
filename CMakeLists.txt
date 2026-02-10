@@ -20,16 +20,15 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 ###########################
 
-
-add_executable(playground main.cpp)
-
 # Build library from `lib/` sources and link into targets
 file(GLOB_RECURSE LIB_SOURCES CONFIGURE_DEPENDS
   "${CMAKE_CURRENT_SOURCE_DIR}/lib/*.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/lib/*.c"
 )
-add_library(playground_lib STATIC ${LIB_SOURCES})
-target_include_directories(playground_lib PUBLIC
+aux_source_directory(lib ALL_LIB_SOURCES)
+add_library(src_lib STATIC ${LIB_SOURCES})
+target_include_directories(src_lib PUBLIC
+  ${ALL_LIB_SOURCES}  
   "${CMAKE_CURRENT_SOURCE_DIR}/lib"
   "${CMAKE_CURRENT_SOURCE_DIR}/lib/board"
   "${CMAKE_CURRENT_SOURCE_DIR}/lib/player"
@@ -37,8 +36,9 @@ target_include_directories(playground_lib PUBLIC
   "${CMAKE_CURRENT_SOURCE_DIR}/lib/strategy"
   "${CMAKE_CURRENT_SOURCE_DIR}/lib/game"
 )
-target_compile_features(playground_lib PUBLIC cxx_std_23)
-target_link_libraries(playground PRIVATE playground_lib)
+target_compile_features(src_lib PUBLIC cxx_std_23)
+add_executable(app lib/main.cpp)
+target_link_libraries(app PRIVATE src_lib)
 
 
 ### TESTING SETUP ###
@@ -53,7 +53,7 @@ add_executable(
 target_link_libraries(
   tests
   GTest::gtest_main
-  playground_lib
+  src_lib
 )
 
 include(GoogleTest)
